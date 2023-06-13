@@ -33,14 +33,18 @@ const FeaturedCategories = () => {
         <div className="col-md-6">
           <ul>
             {leftCategories.map((category, index) => (
-              <li key={index}>{category}</li>
+              <li className="mb-2" key={index}>
+                {category}
+              </li>
             ))}
           </ul>
         </div>
         <div className="col-md-6">
           <ul>
             {rightCategories.map((category, index) => (
-              <li key={index}>{category}</li>
+              <li className="mb-2" key={index}>
+                {category}
+              </li>
             ))}
           </ul>
         </div>
