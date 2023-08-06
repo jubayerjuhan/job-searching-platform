@@ -1,0 +1,14 @@
+.signup {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  min-width: 500px;
+}
+
+.form-group > label {
+  margin-bottom: 10px;
+}

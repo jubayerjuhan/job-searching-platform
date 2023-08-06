@@ -9,7 +9,7 @@ const JobCard = ({ job }) => {
     return `${truncatedDescription}...`;
   };
   return (
-    <div className="jobcard ">
+    <div className="jobcard">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title mb-3">{job.title}</h5>

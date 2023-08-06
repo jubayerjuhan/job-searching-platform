@@ -1,3 +1,11 @@
 .jobcard {
   width: 300px;
 }
+
+.card {
+  min-width: 300px !important;
+}
+
+.card-body {
+  width: 100% !important;
+}
