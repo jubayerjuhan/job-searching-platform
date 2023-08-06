@@ -1,6 +1,28 @@
+import { useState } from "react";
 import "./login.css";
+import { useDispatch } from "react-redux";
+import client from "../../axios/axiosInstance";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const [loginData, setLoginData] = useState({});
+
+  const handleChange = (e) => {
+    setLoginData({ ...loginData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "USER_LOGIN_PENDING" });
+    try {
+      const { data } = await client.post("/employee/login", loginData);
+      console.log(data, "data");
+      dispatch({ type: "USER_LOGIN_SUCCESS", payload: data?.employee });
+      window.location.href = "/";
+    } catch (error) {
+      alert(error.response.data.message || error.message);
+    }
+  };
   return (
     <div className="login">
       <div
@@ -26,13 +48,14 @@ const LoginPage = () => {
         <div className="card-body" style={{ padding: "30px" }}>
           <form>
             <div className="form-group" style={{ marginBottom: "20px" }}>
-              <label htmlFor="username">Username</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
                 className="form-control"
-                id="username"
-                placeholder="Enter your username"
+                id="email"
+                placeholder="Enter your email"
                 style={{ borderRadius: "5px" }}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group" style={{ marginBottom: "20px" }}>
@@ -43,9 +66,14 @@ const LoginPage = () => {
                 id="password"
                 placeholder="Enter your password"
                 style={{ borderRadius: "5px" }}
+                onChange={handleChange}
               />
             </div>
-            <button type="button" className="btn btn-primary w-100">
+            <button
+              type="button"
+              className="btn btn-primary w-100"
+              onClick={handleSubmit}
+            >
               Login
             </button>
           </form>

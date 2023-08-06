@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
+  const { loggedIn } = useSelector((state) => state.user);
   const navbarLinks = [
     { name: "Jobs", link: "/jobs" },
     { name: "Categories", link: "/categories" },
-    { name: "Login", link: "/login" },
-    { name: "Sign Up", link: "/sign-up" },
+    // { name: "Login", link: "/login" },
+    // { name: "Sign Up", link: "/sign-up" },
   ];
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 py-3 d-flex justify-content-between">
@@ -32,6 +35,40 @@ const Navbar = () => {
               </a>
             ))}
           </div>
+          {loggedIn ? (
+            <div className="d-flex gap-2">
+              <button
+                className="btn btn-info"
+                onClick={() => (window.location.href = "/profile")}
+              >
+                Profile
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.href = "/";
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="d-flex gap-2">
+              <button
+                className="btn btn-info"
+                onClick={() => (window.location.href = "/sign-up")}
+              >
+                Sign Up
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => (window.location.href = "/login")}
+              >
+                Login
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
