@@ -1,4 +1,8 @@
 .heroSection {
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-recruitment-fall-job-recruitment-background-banner-image_160868.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 500px;
   display: flex;
   justify-content: center;

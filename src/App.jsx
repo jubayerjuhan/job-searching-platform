@@ -4,6 +4,11 @@ import Homepage from "./pages/Homepage/Homepage";
 import LoginPage from "./pages/Login/Login";
 import SignupPage from "./pages/Signup/Signup";
 import AuthGuard from "./components/AuthGuard/AuthGuard";
+import EmployerSignup from "./pages/EmployerSignup/EmployerSignup";
+import SearchPage from "./pages/SearchPage/SearchPage";
+import AddJobPage from "./pages/AddJob/AddJob";
+import JobDetailPage from "./pages/JobDetail/JobDetail";
+import ResumeGenerator from "./pages/ResumeGenerator/ResumeGenerator";
 
 function App() {
   return (
@@ -11,14 +16,17 @@ function App() {
       <Routes>
         <Route
           element={
-            <AuthGuard>
-              <Homepage />
-            </AuthGuard>
+            <Homepage />
           }
           path="/"
         />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<SignupPage />} path="/sign-up" />
+        <Route element={<EmployerSignup />} path="/sign-up/employer" />
+        <Route element={<SearchPage />} path="/search" />
+        <Route element={<AddJobPage />} path="/add-job" />
+        <Route element={<JobDetailPage />} path="/job/:id" />
+        <Route element={<ResumeGenerator />} path="/resume-generator" />
       </Routes>
     </Router>
   );

@@ -43,7 +43,7 @@ const LoginPage = () => {
             padding: "30px",
           }}
         >
-          <h3>Login</h3>
+          <h3>Employee Login</h3>
         </div>
         <div className="card-body" style={{ padding: "30px" }}>
           <form>
