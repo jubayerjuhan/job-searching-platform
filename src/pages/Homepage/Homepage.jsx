@@ -9,7 +9,7 @@ const Homepage = () => {
       <Navbar />
       <div>
         <HeroSection />
-        <FeaturedCategories />
+        {/* <FeaturedCategories /> */}
         <FeaturedJobs />
       </div>
     </div>

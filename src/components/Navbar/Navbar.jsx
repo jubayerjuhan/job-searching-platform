@@ -1,17 +1,16 @@
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { loggedIn } = useSelector((state) => state.user);
+  const { loggedIn, user } = useSelector((state) => state.user);
   const navbarLinks = [
     { name: "Jobs", link: "/jobs" },
+    { name: "Make Resume", link: "/resume-generator" },
     { name: "Categories", link: "/categories" },
-    // { name: "Login", link: "/login" },
-    // { name: "Sign Up", link: "/sign-up" },
   ];
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 py-3 d-flex justify-content-between">
       <div>
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           Navbar
         </a>
       </div>
@@ -43,6 +42,12 @@ const Navbar = () => {
               >
                 Profile
               </button>
+              {user.role === "employer" && <button
+                className="btn btn-info"
+                onClick={() => (window.location.href = "/add-job")}
+              >
+                Add Job
+              </button>}
               <button
                 className="btn btn-danger"
                 onClick={() => {
@@ -57,6 +62,12 @@ const Navbar = () => {
             <div className="d-flex gap-2">
               <button
                 className="btn btn-info"
+                onClick={() => (window.location.href = "/sign-up/employer")}
+              >
+                Sign Up as Employer
+              </button>
+              <button
+                className="btn btn-info"
                 onClick={() => (window.location.href = "/sign-up")}
               >
                 Sign Up
@@ -66,6 +77,12 @@ const Navbar = () => {
                 onClick={() => (window.location.href = "/login")}
               >
                 Login
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => (window.location.href = "/login/employer")}
+              >
+                Login as Employer
               </button>
             </div>
           )}
