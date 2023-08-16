@@ -12,6 +12,9 @@ import ResumeGenerator from "./pages/ResumeGenerator/ResumeGenerator";
 import EmployerLogin from "./pages/EmployerLogin/EmployerLogin";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import JobsPage from "./pages/JobsPage/JobsPage";
+import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import AdminEmployer from "./pages/AdminEmployer/AdminEmployer";
+import AdminJob from "./pages/AdminJob/AdminJob";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
         <Route element={<JobDetailPage />} path="/job/:id" />
         <Route element={<ResumeGenerator />} path="/resume-generator" />
         <Route element={<ProfilePage />} path="/profile" />
+        <Route element={<AdminUsers />} path="/admin/employee" />
+        <Route element={<AdminEmployer />} path="/admin/employer" />
+        <Route element={<AdminJob />} path="/admin/jobs" />
       </Routes>
     </Router>
   );
