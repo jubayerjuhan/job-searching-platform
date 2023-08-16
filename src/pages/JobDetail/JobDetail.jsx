@@ -56,6 +56,10 @@ const JobDetailPage = () => {
                             <h5 className="card-subtitle mb-2 text-muted">Employer</h5>
                             <p className="card-text">{job.employer.name}</p>
                         </div>
+                        <div className="mb-3">
+                            <h5 className="card-subtitle mb-2 text-muted">Company</h5>
+                            <p className="card-text">{job.employer.company}</p>
+                        </div>
 
                         <div className="mb-3">
                             <label htmlFor="applicantName" className="form-label">Your Name</label>

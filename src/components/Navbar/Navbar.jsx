@@ -5,7 +5,6 @@ const Navbar = () => {
   const navbarLinks = [
     { name: "Jobs", link: "/jobs" },
     { name: "Make Resume", link: "/resume-generator" },
-    { name: "Categories", link: "/categories" },
   ];
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 py-3 d-flex justify-content-between">
