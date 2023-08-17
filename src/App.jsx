@@ -36,10 +36,18 @@ function App() {
           }
           path="/job/:id"
         />
+        <Route
+          element={
+            <AuthGuard>
+              <JobDetailPage applicantPage />
+            </AuthGuard>
+          }
+          path="/job/applicants/:id"
+        />
         <Route element={<ResumeGenerator />} path="/resume-generator" />
         <Route element={<ProfilePage />} path="/profile" />
         <Route element={<AdminUsers />} path="/admin/employee" />
-        <Route element={<AdminUsers />} path="/admin" />
+        <Route element={<AdminUsers />} path="/admin  " />
         <Route element={<AdminEmployer />} path="/admin/employer" />
         <Route element={<AdminJob />} path="/admin/jobs" />
       </Routes>

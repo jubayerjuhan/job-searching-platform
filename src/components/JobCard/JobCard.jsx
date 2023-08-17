@@ -1,6 +1,6 @@
 import "./jobCard.css";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, employeeVersion }) => {
   const truncateDescription = (description, wordCount) => {
     const words = description.split(" ");
     const truncatedWords = words.slice(0, wordCount);
@@ -26,13 +26,25 @@ const JobCard = ({ job }) => {
             {truncateDescription(job.description, 8)}
           </p>
           <div className="d-flex justify-content-between">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => (window.location.href = `/job/${job._id}`)}
-            >
-              Apply Now
-            </button>
+            {employeeVersion ? (
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={() =>
+                  (window.location.href = `/job/applicants/${job._id}`)
+                }
+              >
+                Show Applicants
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => (window.location.href = `/job/${job._id}`)}
+              >
+                Apply Now
+              </button>
+            )}
           </div>
         </div>
       </div>

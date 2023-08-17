@@ -5,14 +5,11 @@ import client from "../../axios/axiosInstance";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const JobDetailPage = () => {
+const JobDetailPage = ({ applicantPage }) => {
   const { user } = useSelector((state) => state.user);
+  const [applicants, setApplicants] = useState([]);
   const [job, setJob] = useState(null);
   const { id } = useParams();
-
-  useEffect(() => {
-    getJob();
-  }, []);
 
   const getJob = async () => {
     try {
@@ -23,6 +20,19 @@ const JobDetailPage = () => {
       alert(error.response.data.message || error.message);
     }
   };
+
+  const getApplicants = async () => {
+    try {
+      const { data } = await client.get(`/jobs/applicants/${id}`);
+      setApplicants(data.appliedEmployees);
+    } catch (error) {
+      alert(error.response.data.message || error.message);
+    }
+  };
+  useEffect(() => {
+    getJob();
+    getApplicants();
+  }, []);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -58,7 +68,7 @@ const JobDetailPage = () => {
         employeeId: user?._id,
         cvLink: imageUrl,
       });
-      console.log(data, "Data");
+      alert(data.message);
     } catch (error) {
       alert(error.response.data.message || error.message);
     }
@@ -82,7 +92,9 @@ const JobDetailPage = () => {
     <>
       <Navbar></Navbar>
       <div className="container mt-5">
-        <h3 className="mb-4">Job Details</h3>
+        <h3 className="mb-4">
+          {applicantPage ? "Job Applicants" : "Job Details"}
+        </h3>
         <div className="card shadow">
           <div className="card-body">
             <h2 className="card-title">{job.role}</h2>
@@ -109,23 +121,71 @@ const JobDetailPage = () => {
               <p className="card-text">{job?.employer?.company}</p>
             </div>
 
-            <div className="mb-3">
+            {!applicantPage && (
               <div className="mb-3">
-                <label className="form-label">Please Upload Your Resume</label>
-                <input
-                  className="form-control"
-                  type="file"
-                  id="formFile"
-                  onChange={handleImageChange}
-                />
+                <div className="mb-3">
+                  <label className="form-label">
+                    Please Upload Your Resume
+                  </label>
+                  <input
+                    className="form-control"
+                    type="file"
+                    id="formFile"
+                    onChange={handleImageChange}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
-            <button className="btn btn-primary" onClick={handleApplyNow}>
-              Apply Now
-            </button>
+            {!applicantPage && (
+              <button className="btn btn-primary" onClick={handleApplyNow}>
+                Apply Now
+              </button>
+            )}
           </div>
         </div>
+        {!applicantPage && (
+          <div>
+            <h2 className="my-4">All Applicants</h2>
+            <div className="d-flex gap-4 mb-4">
+              {applicants.map((applicant) => {
+                console.log(applicant.employee);
+                return (
+                  <div
+                    className="card"
+                    key={applicant.employee?._id}
+                    style={{ width: "18rem" }}
+                  >
+                    <div className="card-body">
+                      <h5 className="card-title">{applicant.employee?.name}</h5>
+                    </div>
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item">
+                        Email: {applicant.employee?.email}
+                      </li>
+                      <li className="list-group-item">
+                        Industry: {applicant.employee?.industry}
+                      </li>
+                      <li className="list-group-item">
+                        Skills: {applicant.employee?.skills}
+                      </li>
+                    </ul>
+                    <div className="card-body">
+                      <a
+                        href={applicant.cvLink}
+                        className="card-link"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <button className="btn btn-info">View Resume</button>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
