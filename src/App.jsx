@@ -20,12 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          element={
-            <Homepage />
-          }
-          path="/"
-        />
+        <Route element={<Homepage />} path="/" />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<SignupPage />} path="/sign-up" />
         <Route element={<JobsPage />} path="/jobs" />
@@ -33,10 +28,18 @@ function App() {
         <Route element={<EmployerLogin />} path="/login/employer" />
         <Route element={<SearchPage />} path="/search" />
         <Route element={<AddJobPage />} path="/add-job" />
-        <Route element={<JobDetailPage />} path="/job/:id" />
+        <Route
+          element={
+            <AuthGuard>
+              <JobDetailPage />
+            </AuthGuard>
+          }
+          path="/job/:id"
+        />
         <Route element={<ResumeGenerator />} path="/resume-generator" />
         <Route element={<ProfilePage />} path="/profile" />
         <Route element={<AdminUsers />} path="/admin/employee" />
+        <Route element={<AdminUsers />} path="/admin" />
         <Route element={<AdminEmployer />} path="/admin/employer" />
         <Route element={<AdminJob />} path="/admin/jobs" />
       </Routes>

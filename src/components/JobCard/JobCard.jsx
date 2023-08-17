@@ -13,15 +13,26 @@ const JobCard = ({ job }) => {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title mb-3">{job.role}</h5>
-          <h6 className="card-subtitle mb-4 text-muted">Work Hour : {job.workingHours}</h6>
-          <h6 className="card-subtitle mb-4 text-muted">Company : {job.employer.company}</h6>
-          <h6 className="card-subtitle mb-4 text-muted">Skills : {job.skills}</h6>
-          <p className="card-text mb-4">{truncateDescription(job.description, 8)}</p>
+          <h6 className="card-subtitle mb-4 text-muted">
+            Work Hour : {job.workingHours}
+          </h6>
+          <h6 className="card-subtitle mb-4 text-muted">
+            Company : {job?.employer?.company}
+          </h6>
+          <h6 className="card-subtitle mb-4 text-muted">
+            Skills : {job.skills}
+          </h6>
+          <p className="card-text mb-4">
+            {truncateDescription(job.description, 8)}
+          </p>
           <div className="d-flex justify-content-between">
-            <button type="button" className="btn btn-primary" onClick={() => window.location.href = `/job/${job._id}`}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => (window.location.href = `/job/${job._id}`)}
+            >
               Apply Now
             </button>
-
           </div>
         </div>
       </div>
